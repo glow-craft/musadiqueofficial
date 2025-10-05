@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Musadique Ali — Portfolio</title>
+  <link rel="icon" href="https://musadiqueofficial.gt.tc/assets/img/preview.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+
+.tagline {
+  margin-top: 10px;
+  color: #a0b3c8;
+  font-size: 1.1rem;
+  min-height: 30px;
+  font-family: 'Poppins', sans-serif;
+  border-right: 2px solid #00aaff;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+    * { box-sizing: border-box; margin:0; padding:0; }
+    html, body { height:100%; overflow-x:hidden; }
+
+    body {
+      color: #eef8ff;
+      cursor: none;
+      position: relative;
+      background: #000;
+    }
+
+    /* video background */
+    #bg-video {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
+      z-index: -100;
+      opacity: 0.7;
+    }
+
+    /* overlay to darken video a bit for contrast */
+    #bg-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.2);
+      z-index: -50;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 10;
+      max-width: 1100px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 24px;
+      padding: 60px 20px;
+    }
+
+    /* hero area adjustments */
+    .hero-section {
+      text-align: center;
+      margin-top: 60px;
+      grid-column: span 2;
+    }
+    .hero-section img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(0, 179, 255, 0.5);
+      box-shadow: 0 0 20px rgba(0,179,255,0.4);
+      margin-bottom: 20px;
+    }
+
+    .hero-section .name {
+      font-size: 2.8rem;
+      color: #eef8ff;
+      cursor: pointer;
+      display: inline-block;
+      position: relative;
+      transition: color 0.3s;
+    }
+    .hero-section .name:hover {
+      color: #00aaff;
+    }
+    .hero-section .name::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: #00aaff;
+      bottom: -6px;
+      left: 0;
+      transition: width 0.4s;
+    }
+    .hero-section .name:hover::after {
+      width: 100%;
+    }
+    .hero-section .tagline {
+      margin-top: 10px;
+      color: #a0b3c8;
+      font-size: 1.1rem;
+    }
+
+    /* glass boxes, cards, contact, etc. (reuse earlier styles) */
+    .panel {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 16px;
+      padding: 28px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 30px rgba(0,0,0,0.6);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .panel:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 40px rgba(0,179,255,0.4);
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: #eef8ff;
+      margin-bottom: 14px;
+    }
+    p {
+      color: #b0c1d1;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 22px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #eef8ff;
+      background: transparent;
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.2s;
+    }
+    .btn.primary {
+      background: linear-gradient(90deg, #00aaff, #6be0ff);
+      color: #0b1218;
+      border: none;
+    }
+    .btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,179,255,0.3);
+    }
+
+
+    /* cursor */
+    .cursor-dot, .cursor-outline {
+      position: fixed;
+      top: 0; left: 0;
+      pointer-events: none;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+    }
+    .cursor-dot {
+      width: 10px; height: 10px;
+      background: linear-gradient(45deg, #00ffff, #0077ff, #ff00ff, #00ffcc);
+      background-size: 400%;
+      animation: rgbFlow 3s linear infinite;
+    }
+    .cursor-outline {
+      width: 36px; height: 36px;
+      border: 2px solid #00ffff;
+      animation: rgbBorder 3s linear infinite;
+      opacity: 0.8;
+      transition: all 0.15s ease-out;
+    }
+    @keyframes rgbFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes rgbBorder {
+      0% { border-color: #00ffff; }
+      25% { border-color: #0077ff; }
+      50% { border-color: #ff00ff; }
+      75% { border-color: #00ffcc; }
+      100% { border-color: #00ffff; }
+    }
+
+        /* responsive */
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; }
+      .hero-section img { width: 140px; height: 140px; }
+    }
+
+    /* Floating Social Icons (Right Side with Scroll Animation) */
+    .social-icons {
+      position: fixed;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 1000;
+      transition: all 0.6s ease;
+      opacity: 1;
+    }
+
+    .social-icons.hidden {
+      transform: translateY(-60%) translateX(100px);
+      opacity: 0;
+    }
+
+    .social-icons a {
+      color: white;
+      font-size: 28px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+.social-icons a:hover {
+  color: #fff; /* White glow color */
+  transform: scale(1.3);
+  text-shadow: 0 0 15px #fff, 0 0 30px #fff, 0 0 45px #fff;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Background Video -->
+  <video id="bg-video" autoplay muted loop playsinline>
+    <source src="https://cdn.pixabay.com/video/2019/10/09/27669-365224683_large.mp4" type="video/mp4">
+    Your browser doesn't support video.
+  </video>
+  <div id="bg-overlay"></div>
+
+  <!-- Cursor elements -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
+
+  <div class="wrap">
+    <!-- Hero across full width -->
+    <div class="hero-section">
+      <img src="https://scontent.fkhi16-1.fna.fbcdn.net/v/t39.30808-6/505823959_4071941946428594_4670818283293797389_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeE9Tjn7iPIDNyiHjOu-lFRfU3WlG2T2b6dTdaUbZPZvp0_i8F65MIrgeOHOBHNO3jvLvQW7hzwLciVHmxE32hEK&_nc_ohc=MGMyllofN7QQ7kNvwHf21M0&_nc_oc=AdlMsCsxLIolA5EI7756iRk7scV6zFYoXw9L2Lj2lS3riyJIoXSBzWQJwM-O2uegmV8&_nc_zt=23&_nc_ht=scontent.fkhi16-1.fna&_nc_gid=FA1d3gBRkCIW-GmReFnJvQ&oh=00_Aff1k2yx-DN20goA46LcIAD035G7ekC8Xz7_zJlGYL16Vg&oe=68E78319" alt="Musadique Ali">
+      <div>
+        <span class="name" onclick="window.open('https://www.linkedin.com/in/musadiqueali','_blank')">Musadique Ali</span>
+      </div>
+      <div class="tagline">
+  <span id="typing"></span>
+</div>
+
+    </div>
+
+    <!-- About -->
+    <div class="panel" style="grid-column: span 2;">
+      <h2>About Me</h2>
+      <p>Hey there, I’m <span class="name" onclick="window.open('https://www.linkedin.com/in/musadiqueali','_blank')">Musadique Ali</span>. I build and sell ready-to-launch portfolio templates and brand assets that empower creators, sellers, and small businesses. My focus: simplicity + impact.</p>
+    </div>
+
+    <!-- Resume section -->
+    <div class="panel">
+      <h2>Resume</h2>
+      <p>My résumé is crafted with substance — if you want to peek into my journey and skills, just reach out.</p>
+      <a class="btn" href="mailto:Rajakha9@gmail.com?subject=Request%20for%20Resume">Request Resume</a>
+    </div>
+
+    <!-- Contact section -->
+    <div class="panel">
+      <h2>Contact</h2>
+      <p>Have a collaboration or project idea? Let’s connect.</p>
+      <p>Email: <a class="btn" style="background: transparent; border: none; color: #00aaff;" href="mailto:Rajakha9@gmail.com">Rajakha9@gmail.com</a></p>
+<p>Whatsapp: <a class="btn" style="background: transparent; border: none; color: #00aaff;" href="mailto:https://wa.me/923368247044">0336-8247044</a></p>
+
+    </div>
+
+
+  <!-- Floating Social Icons -->
+<div class="social-icons">
+  <a href="https://www.facebook.com/share/1BQaQeupDj/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a>
+  <a href="https://www.linkedin.com/in/musadiqueali" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+  <a href="https://wa.me/923555355092" target="_blank"><i class="fab fa-whatsapp"></i></a>
+</div>
+
+  <script>
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorOutline = document.querySelector('.cursor-outline');
+
+    window.addEventListener('mousemove', e => {
+      const x = e.clientX;
+      const y = e.clientY;
+      cursorDot.style.left = `${x}px`;
+      cursorDot.style.top = `${y}px`;
+      cursorOutline.animate({
+        left: `${x}px`,
+        top: `${y}px`
+      }, { duration: 400, fill: "forwards" });
+    });
+
+    window.addEventListener('mousedown', () => {
+      cursorOutline.style.transform = "translate(-50%, -50%) scale(0.8)";
+      cursorOutline.style.opacity = "1";
+    });
+
+    window.addEventListener('mouseup', () => {
+      cursorOutline.style.transform = "translate(-50%, -50%) scale(1)";
+      cursorOutline.style.opacity = "0.8";
+    });
+
+    window.addEventListener('scroll', () => {
+      cursorOutline.style.transform = "translate(-50%, -50%) scale(1.2)";
+      setTimeout(() => {
+        cursorOutline.style.transform = "translate(-50%, -50%) scale(1)";
+      }, 300);
+    });
+  </script>
+<script>
+const socialIcons = document.querySelector('.social-icons');
+let lastScrollY = window.scrollY;
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > lastScrollY) {
+    // Scrolling down → hide icons
+    socialIcons.classList.add('hidden');
+  } else {
+    // Scrolling up → show icons
+    socialIcons.classList.remove('hidden');
+  }
+  lastScrollY = window.scrollY;
+});
+</script>
+<script>
+const texts = [
+  "Portfolio Designer",
+  "Web Developer",
+  "Digital Creator"
+];
+let count = 0;
+let index = 0;
+let currentText = "";
+let letter = "";
+(function type(){
+  if (count === texts.length) { count = 0; }
+  currentText = texts[count];
+  letter = currentText.slice(0, ++index);
+
+  document.getElementById("typing").textContent = letter;
+  if (letter.length === currentText.length) {
+    count++;
+    index = 0;
+    setTimeout(type, 1000);
+  } else {
+    setTimeout(type, 120);
+  }
+})();
+</script>
+
+
+</body>
+</html>
